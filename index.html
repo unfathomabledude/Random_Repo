@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Darvas Oath</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;700&display=swap');
+
+        body {
+            background-color: black;
+            color: white;
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding: 20px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .candles-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+        }
+
+        .candle {
+            position: absolute;
+            width: 2px;
+            border-radius: 1px;
+            opacity: 0.1;
+        }
+
+        .candle.green {
+            background-color: green;
+            animation: rise 5s linear infinite;
+        }
+
+        .candle.red {
+            background-color: red;
+            animation: fall 5s linear infinite;
+        }
+
+        .wick {
+            position: absolute;
+            width: 2px;
+            opacity: 0.5;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .green .wick { background-color: green; }
+        .red .wick { background-color: red; }
+
+        @keyframes rise {
+            from { transform: translateY(100vh); opacity: 0.7; }
+            to { transform: translateY(-10vh); opacity: 0; }
+        }
+
+        @keyframes fall {
+            from { transform: translateY(-10vh); opacity: 0.7; }
+            to { transform: translateY(100vh); opacity: 0; }
+        }
+
+        .oath-container {
+            width: 50%;
+            margin: 100px auto;
+            padding: 20px;
+            text-align: left;
+            font-family: 'Fira Code', monospace;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+
+        .oath {
+            font-size: 30px;
+            font-weight: bold;
+            display: block;
+            white-space: pre-wrap;
+            margin-bottom: 20px;
+        }
+
+        .oath-number {
+            display: inline-block; /* Ensure it stays on the same line */
+            text-align: center;
+            width: auto; /* Allow it to adjust based on content */
+            margin-right: 5px; /* Optional: Adds space between the number and text */
+        }
+
+        .blue { color: #00d9d9; }
+        .pink { color: #ff66b2; }
+        .green { color: #00cc00; }
+        .red { color: #ff3333; }
+        .yellow { color: #ffcc00; }
+        .lightblue { color: #66ccff; }
+        .orange { color: #ff9966; }
+        .purple { color: #cc66cc; }
+        .lightyellow { color: #ffff66; }
+        .lightgreen { color: #99ff99; }
+
+        h1 {
+            font-family: 'Chalkduster', fantasy;
+            font-size: 40px;
+            margin-bottom: 50px;
+        }
+
+        /* Updated CSS for the image */
+        .background-image {
+            position: fixed;
+            bottom: -5px;
+            left: -30px;
+            width: 325px; /* Increased width for larger image */
+            opacity: 1;
+            z-index: -3; /* Ensures the image is behind the other content */
+        }
+
+        /* New CSS for the right center image */
+        .right-center-image {
+            position: fixed;
+            top: 45%; /* Position the image vertically at the center */
+            right: -50px; /* Position the image towards the right */
+            transform: translateY(-50%); /* Adjust for exact center alignment */
+            width: 350px; /* Set a width for the image */
+            opacity: 1; /* Set opacity for the image */
+            z-index: -2; /* Ensure it's behind the content */
+            border-radius: 10px; /* Optional: Add rounded corners */
+        }
+
+        /* New CSS for the "Alpha Guy" text at the bottom right */
+        .trademark-text {
+            position: fixed;
+            bottom: 20px; /* Positioned at the bottom */
+            right: 20px; /* Positioned to the right */
+            font-family: 'Fira Code', monospace;
+            font-size: 25px;
+            color: 'white'; /* Color the text */
+            opacity: 0.2; /* Slight transparency for subtlety */
+            z-index: 9999; /* Make sure it stays above everything else */
+        }
+
+        /* New CSS for the "Alpha Guy" text at the bottom right */
+        .copyright-text {
+            position: fixed;
+            bottom: 50px; /* Positioned at the bottom */
+            right: 20px; /* Positioned to the right */
+            font-family: 'Fira Code', monospace;
+            font-size: 25px;
+            color: 'white'; /* Color the text */
+            opacity: 0.2; /* Slight transparency for subtlety */
+            z-index: 9999; /* Make sure it stays above everything else */
+        }
+    </style>
+</head>
+<body>
+    <div class="candles-container"></div>
+    <h1>I am an Independent Stock Market Trader ❤️💚</h1>
+    <div class="oath-container" id="oath-container"></div>
+
+    <!-- Added Image -->
+    <img src="https://i.imgur.com/Rw6P3Fi.png" class="background-image" alt="Background Image">
+
+    <!-- Added Right Center Image -->
+    <img src="https://i.imgur.com/7Wj6RUz.png" class="right-center-image" alt="Right Center Image">
+
+    <!-- Added Trademark Text -->
+    <div class="trademark-text">Unfathomable Guy</div>
+
+    <!-- Added Trademark Text -->
+    <div class="copyright-text">©</div>
+
+    <script>
+        const oaths = [
+            { number: 1, text: "I will follow rules and Regulations in my Trading Journey.", color: "blue" },
+            { number: 2, text: "I will trade my own stock selection, no stock Tips from others.", color: "pink" },
+            { number: 3, text: "I will buy stocks at support and breakout only, will not chase extended stock.", color: "green" },
+            { number: 4, text: "My Stop loss is my guard, will always respect it.", color: "red" },
+            { number: 5, text: "Stock Market is a Business like any other Business, Not all months will be profitable, I will book loss whenever required.", color: "yellow" },
+            { number: 6, text: "I will not lose Patience, build my Patience level stronger with time. 🧘", color: "lightblue" },
+            { number: 7, text: "My setup is Best, I am going to be a Best Trader.", color: "orange" },
+            { number: 8, text: "I will bring spirituality in my Trading Career to stay calm when circumstances will not favour in my direction.", color: "purple" },
+            { number: 9, text: "I will focus on making my Trading process stronger, money will remain secondary for me.", color: "lightyellow" },
+            { number: 10, text: "Stock Market is a business of Probability, I will follow the market, my Ego has no place in market.", color: "lightgreen" }
+        ];
+
+        function typeEffect(text, element, speed = 25) {
+            let i = 0;
+            let displayText = text.split("").map(() => " ").join(""); 
+            element.innerText = displayText; 
+            
+            function type() {
+                if (i < text.length) {
+                    displayText = displayText.substring(0, i) + text.charAt(i) + displayText.substring(i + 1);
+                    element.innerText = displayText;
+                    i++;
+                    setTimeout(type, speed);
+                }
+            }
+            type();
+        }
+
+        function showOath() {
+            document.getElementById("oath-container").innerHTML = "";
+            const randomOath = oaths[Math.floor(Math.random() * oaths.length)];
+
+            // Create the oath number and oath text elements
+            const oathNumberElement = document.createElement("span");
+            oathNumberElement.className = `oath-number oath ${randomOath.color}`;
+            oathNumberElement.innerText = '# '+`${randomOath.number}`; // Show only the number
+
+            const oathTextElement = document.createElement("span");
+            oathTextElement.className = `oath ${randomOath.color}`;
+
+            document.getElementById("oath-container").appendChild(oathNumberElement);
+            //document.getElementById("oath-container").appendChild(document.createElement("br")); // Line break
+            document.getElementById("oath-container").appendChild(oathTextElement);
+            
+            // Type out the text for the oath
+            typeEffect(randomOath.text, oathTextElement);
+        }
+
+        setInterval(showOath, 5000);
+        showOath();
+
+        function createCandles() {
+            const container = document.querySelector(".candles-container");
+            setInterval(() => {
+                const candle = document.createElement("div");
+                const isRed = Math.random() > 0.5;
+                candle.classList.add("candle", isRed ? "red" : "green");
+                candle.style.left = `${Math.random() * 100}vw`;
+                candle.style.height = `${Math.random() * 50 + 20}px`;
+
+                const wick = document.createElement("div");
+                wick.classList.add("wick");
+                wick.style.height = `${Math.random() * 20 + 10}px`;
+                wick.classList.add(isRed ? "red" : "green");
+                wick.style.top = isRed ? "-10px" : "100%";
+
+                candle.appendChild(wick);
+                container.appendChild(candle);
+                setTimeout(() => candle.remove(), 5000);
+            }, 300);
+        }
+
+        createCandles();
+    </script>
+</body>
+</html>
